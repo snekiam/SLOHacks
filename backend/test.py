@@ -24,7 +24,7 @@ sp_oauth = oauth2.SpotifyOAuth(client_id, client_secret, redirect_uri)
 @app.route('/login')
 def hello_world():
 
-    scope = 'playlist-modify-public user-library-read'
+    scope = 'playlist-modify-public user-library-read user-top-read'
     auth_query_parameters = {
         "response_type": "code",
         "redirect_uri": redirect_uri,
@@ -39,9 +39,28 @@ def hello_world():
 def handle_callback():
     code = request.args['code']
     token = sp_oauth.get_access_token(code)
-    print(token)
     spotify = spotipy.Spotify(auth=token['access_token'])
-    results = spotify.audio_features(tracks=['57lCa95tmjJ8EYdNTex8Kk'])
-    results_json = jsonify(results)
-    print(results_json)
-    return jsonify(results)
+    # return(jsonify(spotify.search(q='genre:pop', market='US', limit=50)['tracks']['items'][0]['id']))
+    top_songs_audio_features = get_genre_attributes(spotify)
+    spotify.user_playlist_create(sp_oauth)
+    return top_songs_audio_features
+
+def get_top_song_attributes(spotify):
+    audio_features = []
+    # get the user's current top 1,000 songs and their attributes
+    # this will take several seconds to run
+    for i in range(0, 20):
+        track_ids = [song['id'] for song in spotify.current_user_top_tracks(limit=50, offset=50*i + 1)['items']]
+        audio_features.extend(spotify.audio_features(track_ids))
+    return(jsonify(audio_features))
+
+def get_genre_attributes(spotify):
+    audio_features = []
+    # get the audio features for the top 1,000 songs in a genre
+    # this will take several seconds to run
+    # for i in range(0, 20):
+    for i in range(0, 20):
+        track_ids = [song['id'] for song in spotify.search(q='genre:rap', market='US', limit=50, offset=50*i)['tracks']['items']]
+        audio_features.extend(spotify.audio_features(track_ids))
+    return(jsonify(audio_features))
+
