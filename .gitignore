@@ -140,3 +140,5 @@ chrome-user-data
 .vscode
 *.swp
 *.swo
+# config file with keys
+*.cfg
