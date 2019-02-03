@@ -23,7 +23,7 @@ def get_Kneighbors_test_error(k):
         pipeline = Pipeline([('transform', scaler), ('fit', model)])
         return np.sqrt(np.abs(cross_val_score(pipeline, X_train, y_train, cv=10, scoring="neg_mean_squared_error").mean()))
 
-def k-nearest():
+def k_nearest():
     # Import JSON files
 
     with open("top_tracks_attributes.json") as f:
