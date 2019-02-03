@@ -1,7 +1,5 @@
 # Libraries
 
-%matplotlib inline
-
 import json
 
 import pandas as pd
