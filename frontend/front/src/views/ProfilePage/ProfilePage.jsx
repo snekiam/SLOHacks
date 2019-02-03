@@ -30,187 +30,89 @@ import work3 from "assets/img/examples/cynthia-del-rio.jpg";
 import work4 from "assets/img/examples/mariya-georgieva.jpg";
 import work5 from "assets/img/examples/clem-onojegaw.jpg";
 
-import profilePageStyle from "assets/jss/material-kit-react/views/profilePage.jsx";
+import componentsStyle from "assets/jss/material-kit-react/views/components.jsx";
 
-class ProfilePage extends React.Component {
+class Components extends React.Component {
   render() {
     const { classes, ...rest } = this.props;
-    const imageClasses = classNames(
-      classes.imgRaised,
-      classes.imgRoundedCircle,
-      classes.imgFluid
-    );
-    const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
     return (
       <div>
         <Header
-          color="transparent"
-          brand="Material Kit React"
+          brand="Statify"
           rightLinks={<HeaderLinks />}
           fixed
+          color="transparent"
           changeColorOnScroll={{
-            height: 200,
+            height: 400,
             color: "white"
           }}
           {...rest}
         />
-        <Parallax small filter image={require("assets/img/profile-bg.jpg")} />
-        <div className={classNames(classes.main, classes.mainRaised)}>
-          <div>
-            <div className={classes.container}>
-              <GridContainer justify="center">
-                <GridItem xs={12} sm={12} md={6}>
-                  <div className={classes.profile}>
-                    <div>
-                      <img src={profile} alt="..." className={imageClasses} />
-                    </div>
-                    <div className={classes.name}>
-                      <h3 className={classes.title}>Christian Louboutin</h3>
-                      <h6>DESIGNER</h6>
-                      <Button justIcon link className={classes.margin5}>
-                        <i className={"fab fa-twitter"} />
-                      </Button>
-                      <Button justIcon link className={classes.margin5}>
-                        <i className={"fab fa-instagram"} />
-                      </Button>
-                      <Button justIcon link className={classes.margin5}>
-                        <i className={"fab fa-facebook"} />
-                      </Button>
-                    </div>
-                  </div>
-                </GridItem>
-              </GridContainer>
-              <div className={classes.description}>
-                <p>
-                  An artist of considerable range, Chet Faker — the name taken
-                  by Melbourne-raised, Brooklyn-based Nick Murphy — writes,
-                  performs and records all of his own music, giving it a warm,
-                  intimate feel with a solid groove structure.{" "}
-                </p>
-              </div>
-              <GridContainer justify="center">
-                <GridItem xs={12} sm={12} md={8} className={classes.navWrapper}>
-                  <NavPills
-                    alignCenter
-                    color="primary"
-                    tabs={[
-                      {
-                        tabButton: "Studio",
-                        tabIcon: Camera,
-                        tabContent: (
-                          <GridContainer justify="center">
-                            <GridItem xs={12} sm={12} md={4}>
-                              <img
-                                alt="..."
-                                src={studio1}
-                                className={navImageClasses}
-                              />
-                              <img
-                                alt="..."
-                                src={studio2}
-                                className={navImageClasses}
-                              />
-                            </GridItem>
-                            <GridItem xs={12} sm={12} md={4}>
-                              <img
-                                alt="..."
-                                src={studio5}
-                                className={navImageClasses}
-                              />
-                              <img
-                                alt="..."
-                                src={studio4}
-                                className={navImageClasses}
-                              />
-                            </GridItem>
-                          </GridContainer>
-                        )
-                      },
-                      {
-                        tabButton: "Work",
-                        tabIcon: Palette,
-                        tabContent: (
-                          <GridContainer justify="center">
-                            <GridItem xs={12} sm={12} md={4}>
-                              <img
-                                alt="..."
-                                src={work1}
-                                className={navImageClasses}
-                              />
-                              <img
-                                alt="..."
-                                src={work2}
-                                className={navImageClasses}
-                              />
-                              <img
-                                alt="..."
-                                src={work3}
-                                className={navImageClasses}
-                              />
-                            </GridItem>
-                            <GridItem xs={12} sm={12} md={4}>
-                              <img
-                                alt="..."
-                                src={work4}
-                                className={navImageClasses}
-                              />
-                              <img
-                                alt="..."
-                                src={work5}
-                                className={navImageClasses}
-                              />
-                            </GridItem>
-                          </GridContainer>
-                        )
-                      },
-                      {
-                        tabButton: "Favorite",
-                        tabIcon: Favorite,
-                        tabContent: (
-                          <GridContainer justify="center">
-                            <GridItem xs={12} sm={12} md={4}>
-                              <img
-                                alt="..."
-                                src={work4}
-                                className={navImageClasses}
-                              />
-                              <img
-                                alt="..."
-                                src={studio3}
-                                className={navImageClasses}
-                              />
-                            </GridItem>
-                            <GridItem xs={12} sm={12} md={4}>
-                              <img
-                                alt="..."
-                                src={work2}
-                                className={navImageClasses}
-                              />
-                              <img
-                                alt="..."
-                                src={work1}
-                                className={navImageClasses}
-                              />
-                              <img
-                                alt="..."
-                                src={studio1}
-                                className={navImageClasses}
-                              />
-                            </GridItem>
-                          </GridContainer>
-                        )
-                      }
-                    ]}
-                  />
-                </GridItem>
-              </GridContainer>
-            </div>
+
+        <Parallax image={require("assets/img/Audio-Waveforms-Featued-Image.jpg")}>
+          <div className={classes.container}>
+            <GridContainer justify="center">
+              <GridItem>
+                <div className={classes.brand}>
+                  <h1 className={classes.title}> </h1>
+                  <h3 className={classes.subtitle}>
+                    To Begin, Select a Genre!
+                  </h3>
+                </div>
+              </GridItem>
+            </GridContainer>
+              <GridItem xs={12} sm={12} md={8} justify="left">
+                <Button href="http://localhost:5000/login?genre=Hip-Hop" color="primary" round>
+                  Hip-Hop
+                </Button>
+                <Button href="http://localhost:5000/login?genre=Rap" color="primary" round>
+                  Rap
+                  </Button>
+                <Button href="http://localhost:5000/login?genre=Pop" color="primary" round>
+                  Pop
+                  </Button>
+                <Button href="http://localhost:5000/login?genre=Rock" color="primary" round>
+                  Rock
+                  </Button>
+                <Button href="http://localhost:5000/login?genre=Classical" color="primary" round>
+                  Classical
+                  </Button>
+                <Button href="http://localhost:5000/login?genre=RnB" color="primary" round>
+                  RnB
+                  </Button>
+                <Button href="http://localhost:5000/login?genre=EDM" color="primary" round>
+                  EDM  
+                  </Button>
+                <Button href="http://localhost:5000/login?genre=Jazz" color="primary" round>
+                    Jazz
+                  </Button>
+                <Button href="http://localhost:5000/login?genre=Latin" color="primary" round>
+                    Latin
+                  </Button>
+                <Button href="http://localhost:5000/login?genre=Indie" color="primary" round>
+                    Indie
+                  </Button>
+                <Button href="http://localhost:5000/login?genre=KPop" color="primary" round>
+                    K-Pop
+                  </Button>
+                <Button href="http://localhost:5000/login?genre=Reggae" color="primary" round>
+                  Reggae
+                  </Button>
+                <Button href="http://localhost:5000/login?genre=Worship" color="primary" round>
+                    Worship
+                  </Button>
+                <Button href="http://localhost:5000/login?genre=Sleep" color="primary" round>
+                    Sleep
+                  </Button>
+              </GridItem>
           </div>
-        </div>
+        </Parallax>
+
+        
         <Footer />
       </div>
     );
   }
 }
 
-export default withStyles(profilePageStyle)(ProfilePage);
+export default withStyles(componentsStyle)(Components);
