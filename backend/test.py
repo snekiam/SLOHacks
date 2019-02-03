@@ -20,16 +20,18 @@ client_id = config.get('SPOTIFY', 'CLIENT_ID')
 redirect_uri = config.get('SPOTIFY', 'REDIRECT_URL')
 client_secret = config.get('SPOTIFY', 'CLIENT_SECRET')
 sp_oauth = oauth2.SpotifyOAuth(client_id, client_secret, redirect_uri)
+genre = ''
+
 
 @app.route('/login')
 def hello_world():
-
-    scope = 'playlist-modify-public user-library-read user-top-read'
+    scope = 'playlist-modify-public playlist-modify-private user-library-read user-top-read'
     auth_query_parameters = {
         "response_type": "code",
         "redirect_uri": redirect_uri,
         "scope": scope,
-        "client_id": client_id
+        "client_id": client_id,
+        "state": "Rock"
     }
     url_args = "&".join(["{}={}".format(key,urllib.quote(val)) for key,val in auth_query_parameters.iteritems()])
     auth_url = "{}/?{}".format("https://accounts.spotify.com/authorize", url_args)
@@ -37,19 +39,24 @@ def hello_world():
 
 @app.route('/spotify-login/')
 def handle_callback():
+    genre = request.args['state']
     code = request.args['code']
     token = sp_oauth.get_access_token(code)
     spotify = spotipy.Spotify(auth=token['access_token'])
-    # return(jsonify(spotify.search(q='genre:pop', market='US', limit=50)['tracks']['items'][0]['id']))
     top_songs_audio_features = get_top_song_attributes(spotify)
-    # spotify.user_playlist_create(sp_oauth)
-    return top_songs_audio_features
+    genre_audio_features = get_genre_attributes(spotify)
+    return(top_songs_audio_features)
+    # song_list = ml_func(top_songs_audio_features, genre_audio_features)
+
 
 def get_top_song_attributes(spotify):
     audio_features = []
     # get the user's current top 99 songs (the max spotify will let you)
-    track_ids = [song['id'] for song in spotify.current_user_top_tracks(limit=50, offset=0)['items']]
-    track_ids.extend([song['id'] for song in spotify.current_user_top_tracks(limit=50, offset=49)['items']])
+    track_ids = [song['id'] for song in spotify.current_user_top_tracks(limit=50, offset=0, time_range="long_term")['items']]
+    track_ids.extend([song['id'] for song in spotify.current_user_top_tracks(limit=50, offset=49, time_range="long_term")['items']])
+    print(track_ids[0:10])
+    playlist_id = spotify.user_playlist_create(spotify.me()['id'], 'TurboMusic Generated Playlist')['id']
+    spotify.user_playlist_add_tracks(spotify.me()['id'], playlist_id, track_ids)
     audio_features = spotify.audio_features(track_ids)
     return(jsonify(audio_features))
 
