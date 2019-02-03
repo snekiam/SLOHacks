@@ -16,13 +16,8 @@ from sklearn.model_selection import cross_val_score
 
 # Neural Network
 from sklearn.neural_network import MLPRegressor
-def k_nearest(top_tracks, genre_tracks):
-    top_tracks_json = json.load(top_tracks)
-
-    genre_tracks_json = json.load(genre_tracks)
-
-    # with open
-
+def k_nearest(top_tracks_json, genre_tracks_json):
+ 
     top_tracks = json_normalize(top_tracks_json)
     top_tracks['rank'] = range(1, len(top_tracks) + 1)
     top_tracks['rank'] = top_tracks['rank'] / len(top_tracks)

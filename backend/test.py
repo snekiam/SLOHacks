@@ -1,8 +1,8 @@
 from flask import Flask
-from flask import jsonify
 from flask import request
 from flask import redirect
-
+from flask import jsonify
+import json
 import requests
 import urllib
 
@@ -45,9 +45,11 @@ def handle_callback():
     spotify = spotipy.Spotify(auth=token['access_token'])
     top_songs_audio_features = get_top_song_attributes(spotify)
     genre_audio_features = get_genre_attributes(spotify)
-    track_ids = k_nearest(top_songs_audio_features, genre_audio_features)[0:9]
+    track_ids = k_nearest(top_songs_audio_features,genre_audio_features)[0:9]
     playlist_id = spotify.user_playlist_create(spotify.me()['id'], 'Statify Generated Playlist with Genre '+ genre)['id']
     spotify.user_playlist_add_tracks(spotify.me()['id'], playlist_id, track_ids)
+    return(playlist_id)
+
 
 def get_top_song_attributes(spotify):
     audio_features = []
@@ -55,15 +57,15 @@ def get_top_song_attributes(spotify):
     track_ids = [song['id'] for song in spotify.current_user_top_tracks(limit=50, offset=0, time_range="long_term")['items']]
     track_ids.extend([song['id'] for song in spotify.current_user_top_tracks(limit=50, offset=49, time_range="long_term")['items']])
     audio_features = spotify.audio_features(track_ids)
-    return(jsonify(audio_features))
+    return(audio_features)
 
 def get_genre_attributes(spotify):
     audio_features = []
     # get the audio features for the top 1,000 songs in a genre
     # this will take several seconds to run
     # for i in range(0, 20):
-    for i in range(0, 20):
+    for i in range(0, 2):
         track_ids = [song['id'] for song in spotify.search(q='genre:rock', market='US', limit=50, offset=50*i)['tracks']['items']]
         audio_features.extend(spotify.audio_features(track_ids))
-    return(jsonify(audio_features))
+    return(audio_features)
 
