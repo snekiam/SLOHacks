@@ -25,14 +25,20 @@ import WorkSection from "./Sections/WorkSection.jsx";
 const dashboardRoutes = [];
 
 class LandingPage extends React.Component {
+   
+
   render() {
+  
+    const urlString = "https://open.spotify.com/embed/playlist/"
+    const locationString = window.location.search
+    const sourceString = urlString + locationString.substring(4, locationString.length)
     const { classes, ...rest } = this.props;
     return (
       <div>
         <Header
           color="transparent"
           routes={dashboardRoutes}
-          brand="Material Kit React"
+          brand="Statify"
           rightLinks={<HeaderLinks />}
           fixed
           changeColorOnScroll={{
@@ -41,36 +47,27 @@ class LandingPage extends React.Component {
           }}
           {...rest}
         />
-        <Parallax filter image={require("assets/img/landing-bg.jpg")}>
+        <Parallax filter image={require("assets/img/Audio-Waveforms-Featued-Image.jpg")}>
           <div className={classes.container}>
-            <GridContainer>
-              <GridItem xs={12} sm={12} md={6}>
-                <h1 className={classes.title}>Your Story Starts With Us.</h1>
-                <h4>
-                  Every landing page needs a small description after the big
-                  bold title, that's why we added this text here. Add here all
-                  the information that can make you or your product create the
-                  first impression.
-                </h4>
-                <br />
-                <Button
-                  color="danger"
-                  size="lg"
-                  href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <i className="fas fa-play" />Watch video
-                </Button>
+            <GridContainer justify="right">
+              <GridItem>
+              <h3 className={classes.subtitle}>
+                    A Playlist Made Just For You
+                </h3>
               </GridItem>
+              <GridItem>
+                <h3 classname={classes.subtitle}> 
+                </h3>
+              </GridItem>
+              <iframe src={sourceString} width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+             
+              
             </GridContainer>
           </div>
         </Parallax>
         <div className={classNames(classes.main, classes.mainRaised)}>
           <div className={classes.container}>
-            <ProductSection />
-            <TeamSection />
-            <WorkSection />
+           
           </div>
         </div>
         <Footer />

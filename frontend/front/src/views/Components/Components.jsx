@@ -36,7 +36,7 @@ class Components extends React.Component {
     return (
       <div>
         <Header
-          brand="Spotify"
+          brand="Statify"
           rightLinks={<HeaderLinks />}
           fixed
           color="transparent"
@@ -54,13 +54,13 @@ class Components extends React.Component {
                 <div className={classes.brand}>
                   <h1 className={classes.title}> </h1>
                   <h3 className={classes.subtitle}>
-                    Welcome!
+                    Connect to Spotify to Receive Your Playlist!
                   </h3>
                 </div>
               </GridItem>
             </GridContainer>
               <GridItem xs={12} sm={12} md={8} justify="left">
-                <Button href="http://localhost:5000/login" color="success" round>
+                <Button href="http://localhost:5000/login" color="primary" round>
                   Sign in
                 </Button>
               </GridItem>
