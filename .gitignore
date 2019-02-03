@@ -142,3 +142,4 @@ chrome-user-data
 *.swo
 # config file with keys
 *.cfg
+secret_keys.py

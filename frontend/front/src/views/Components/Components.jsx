@@ -77,9 +77,6 @@ class Components extends React.Component {
                 <Button href="http://localhost:5000/login?genre=Classical" color="primary" round>
                   Classical
                   </Button>
-                <Button href="http://localhost:5000/login?genre=RnB" color="primary" round>
-                  RnB
-                  </Button>
                 <Button href="http://localhost:5000/login?genre=EDM" color="primary" round>
                   EDM  
                   </Button>
@@ -92,7 +89,7 @@ class Components extends React.Component {
                 <Button href="http://localhost:5000/login?genre=Indie" color="primary" round>
                     Indie
                   </Button>
-                <Button href="http://localhost:5000/login?genre=KPop" color="primary" round>
+                <Button href="http://localhost:5000/login?genre=K-Pop" color="primary" round>
                     K-Pop
                   </Button>
                 <Button href="http://localhost:5000/login?genre=Reggae" color="primary" round>

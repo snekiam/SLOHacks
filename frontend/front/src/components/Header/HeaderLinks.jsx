@@ -25,7 +25,7 @@ function HeaderLinks({ ...props }) {
       
       <ListItem className={classes.listItem}>
         <Button
-          href="http://localhost:3003/profile-page"
+          href="http://localhost:3000/"
           color="transparent"
           target="_blank"
           className={classes.navLink}
