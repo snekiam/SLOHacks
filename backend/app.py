@@ -25,13 +25,14 @@ sp_oauth = oauth2.SpotifyOAuth(client_id, client_secret, redirect_uri)
 
 @app.route('/login')
 def hello_world():
+    genre = request.args['genre']
     scope = 'playlist-modify-public playlist-modify-private user-library-read user-top-read'
     auth_query_parameters = {
         "response_type": "code",
         "redirect_uri": redirect_uri,
         "scope": scope,
         "client_id": client_id,
-        "state": "Rock"
+        "state": genre
     }
     url_args = "&".join(["{}={}".format(key,urllib.parse.quote(val)) for (key,val) in auth_query_parameters.items()])
     auth_url = "{}/?{}".format("https://accounts.spotify.com/authorize", url_args)
