@@ -59,7 +59,7 @@ class LandingPage extends React.Component {
                 <h3 classname={classes.subtitle}> 
                 </h3>
               </GridItem>
-              <iframe src={sourceString} width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+              <iframe src={sourceString} width="550" height="480" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
              
               
             </GridContainer>
