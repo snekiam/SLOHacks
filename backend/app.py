@@ -45,7 +45,7 @@ def handle_callback():
     token = sp_oauth.get_access_token(code)
     spotify = spotipy.Spotify(auth=token['access_token'])
     top_songs_audio_features = get_top_song_attributes(spotify)
-    genre_audio_features = get_genre_attributes(spotify)
+    genre_audio_features = get_genre_attributes(spotify, genre)
     track_ids = k_nearest(top_songs_audio_features,genre_audio_features)[0:9]
     playlist_id = spotify.user_playlist_create(spotify.me()['id'], 'Statify Generated Playlist with Genre '+ genre)['id']
     spotify.user_playlist_add_tracks(spotify.me()['id'], playlist_id, track_ids)
@@ -64,13 +64,13 @@ def get_top_song_attributes(spotify):
     audio_features = spotify.audio_features(track_ids)
     return(audio_features)
 
-def get_genre_attributes(spotify):
+def get_genre_attributes(spotify,genre):
     audio_features = []
     # get the audio features for the top 1,000 songs in a genre
     # this will take several seconds to run
     # for i in range(0, 20):
-    for i in range(0, 2):
-        track_ids = [song['id'] for song in spotify.search(q='genre:rock', market='US', limit=50, offset=50*i)['tracks']['items']]
+    for i in range(0, 20):
+        track_ids = [song['id'] for song in spotify.search(q='genre:'+genre, market='US', limit=50, offset=50*i)['tracks']['items']]
         audio_features.extend(spotify.audio_features(track_ids))
     return(audio_features)
 
