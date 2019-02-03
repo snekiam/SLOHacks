@@ -33,28 +33,7 @@ function HeaderLinks({ ...props }) {
           <i className /> Home
         </Button>
       </ListItem>
-      <ListItem className={classes.listItem}>
-        <Button
-          href="http://localhost:3003/"
-          color="transparent"
-          target="_blank"
-          className={classes.navLink}
-          disabled
-        >
-          <i className /> Spotify Login
-        </Button>
-      </ListItem>
-      <ListItem className={classes.listItem}>
-        <Button
-          href="http://localhost:3003/landing-page"
-          color="transparent"
-          target="_blank"
-          className={classes.navLink}
-          disabled
-        >
-          <i className /> Playlists
-        </Button>
-      </ListItem>
+     
       
     </List>
   );
