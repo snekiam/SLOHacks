@@ -36,7 +36,7 @@ class Components extends React.Component {
     return (
       <div>
         <Header
-          brand="Material Kit React"
+          brand="Spotify"
           rightLinks={<HeaderLinks />}
           fixed
           color="transparent"
@@ -46,42 +46,28 @@ class Components extends React.Component {
           }}
           {...rest}
         />
-        <Parallax image={require("assets/img/bg4.jpg")}>
+
+        <Parallax image={require("assets/img/Audio-Waveforms-Featued-Image.jpg")}>
           <div className={classes.container}>
-            <GridContainer>
+            <GridContainer justify="center">
               <GridItem>
                 <div className={classes.brand}>
-                  <h1 className={classes.title}>Material Kit React.</h1>
+                  <h1 className={classes.title}> </h1>
                   <h3 className={classes.subtitle}>
-                    A Badass Material-UI Kit based on Material Design.
+                    Welcome!
                   </h3>
                 </div>
               </GridItem>
             </GridContainer>
+              <GridItem xs={12} sm={12} md={8} justify="left">
+                <Button href="http://localhost:5000/login" color="success" round>
+                  Sign in
+                </Button>
+              </GridItem>
           </div>
         </Parallax>
 
-        <div className={classNames(classes.main, classes.mainRaised)}>
-          <SectionBasics />
-          <SectionNavbars />
-          <SectionTabs />
-          <SectionPills />
-          <SectionNotifications />
-          <SectionTypography />
-          <SectionJavascript />
-          <SectionCarousel />
-          <SectionCompletedExamples />
-          <SectionLogin />
-          <GridItem md={12} className={classes.textCenter}>
-            <Link to={"/login-page"} className={classes.link}>
-              <Button color="primary" size="lg" simple>
-                View Login Page
-              </Button>
-            </Link>
-          </GridItem>
-          <SectionExamples />
-          <SectionDownload />
-        </div>
+        
         <Footer />
       </div>
     );
