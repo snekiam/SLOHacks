@@ -48,8 +48,12 @@ def handle_callback():
     track_ids = k_nearest(top_songs_audio_features,genre_audio_features)[0:9]
     playlist_id = spotify.user_playlist_create(spotify.me()['id'], 'Statify Generated Playlist with Genre '+ genre)['id']
     spotify.user_playlist_add_tracks(spotify.me()['id'], playlist_id, track_ids)
-    return(playlist_id)
-
+    auth_query_parameters = {
+        "id": playlist_id,
+    }
+    url_args = "&".join(["{}={}".format(key,urllib.parse.quote(val)) for (key,val) in auth_query_parameters.items()])
+    auth_url = "{}/?{}".format("http://localhost:3000/landing-page", url_args)
+    return redirect(auth_url)
 
 def get_top_song_attributes(spotify):
     audio_features = []
