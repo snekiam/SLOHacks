@@ -16,21 +16,10 @@ from sklearn.model_selection import cross_val_score
 
 # Neural Network
 from sklearn.neural_network import MLPRegressor
+def k_nearest(top_tracks, genre_tracks):
+    top_tracks_json = json.load(top_tracks)
 
-def get_Kneighbors_test_error(k):
-        scaler = StandardScaler()
-        model = KNeighborsRegressor(n_neighbors=k)
-        pipeline = Pipeline([('transform', scaler), ('fit', model)])
-        return np.sqrt(np.abs(cross_val_score(pipeline, X_train, y_train, cv=10, scoring="neg_mean_squared_error").mean()))
-
-def k_nearest():
-    # Import JSON files
-
-    with open("top_tracks_attributes.json") as f:
-        top_tracks_json = json.load(f)
-
-    with open("genre_attributes.json") as f:
-        genre_tracks_json = json.load(f)
+    genre_tracks_json = json.load(genre_tracks)
 
     # with open
 
@@ -51,6 +40,12 @@ def k_nearest():
     y_test = test['rank']
     
     # Find Optimal K-Value
+
+    def get_Kneighbors_test_error(k):
+        scaler = StandardScaler()
+        model = KNeighborsRegressor(n_neighbors=k)
+        pipeline = Pipeline([('transform', scaler), ('fit', model)])
+        return np.sqrt(np.abs(cross_val_score(pipeline, X_train, y_train, cv=10, scoring="neg_mean_squared_error").mean()))
 
     ks = pd.Series(range(1, 30, 1))
     ks.index = ks
